@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual Técnico - Tablero de Rentabilidad de Rutas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background: #f9fafb;
+      padding: 40px;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 12px;
+    }
+    
+    .header {
+      text-align: center;
+      padding-bottom: 30px;
+      border-bottom: 3px solid #3b82f6;
+      margin-bottom: 40px;
+    }
+    
+    .header h1 {
+      font-size: 2.2rem;
+      color: #1e3a5f;
+      margin-bottom: 10px;
+    }
+    
+    .header .subtitle {
+      font-size: 1.1rem;
+      color: #6b7280;
+    }
+    
+    .header .meta {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      color: #1e3a5f;
+      margin: 35px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    
+    h3 {
+      font-size: 1.2rem;
+      color: #374151;
+      margin: 25px 0 15px;
+    }
+    
+    h4 {
+      font-size: 1rem;
+      color: #4b5563;
+      margin: 20px 0 10px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+    
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 12px 15px;
+      text-align: left;
+    }
+    
+    th {
+      background: #1e3a5f;
+      color: white;
+      font-weight: 600;
+    }
+    
+    tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    
+    .formula-box {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1px solid #3b82f6;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: 'Consolas', monospace;
+    }
+    
+    .formula-box .title {
+      font-weight: bold;
+      color: #1e40af;
+      margin-bottom: 10px;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    
+    .example-box {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border: 1px solid #10b981;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .example-box .title {
+      font-weight: bold;
+      color: #047857;
+      margin-bottom: 10px;
+    }
+    
+    .warning-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 1px solid #f59e0b;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .warning-box .title {
+      font-weight: bold;
+      color: #92400e;
+      margin-bottom: 10px;
+    }
+    
+    .status-table td:first-child {
+      font-weight: bold;
+    }
+    
+    .status-ideal { color: #3b82f6; }
+    .status-stable { color: #10b981; }
+    .status-comodin { color: #f59e0b; }
+    .status-danger { color: #ef4444; }
+    
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.9em;
+    }
+    
+    .toc {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 25px;
+      margin: 30px 0;
+    }
+    
+    .toc h3 {
+      margin-top: 0;
+      color: #1e3a5f;
+    }
+    
+    .toc ol {
+      margin-left: 20px;
+    }
+    
+    .toc li {
+      margin: 8px 0;
+    }
+    
+    .toc a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    
+    .toc a:hover {
+      text-decoration: underline;
+    }
+    
+    .page-break {
+      page-break-after: always;
+    }
+    
+    .summary-table {
+      background: #1e3a5f;
+      color: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .summary-table th {
+      background: #0f172a;
+    }
+    
+    .summary-table td {
+      border-color: #374151;
+    }
+    
+    .footer {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 2px solid #e5e7eb;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 0.9rem;
+    }
+    
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+      
+      .container {
+        box-shadow: none;
+        padding: 30px;
+      }
+      
+      .page-break {
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🚛 MANUAL TÉCNICO</h1>
+      <div class="subtitle">Tablero de Rentabilidad de Rutas</div>
+      <div class="subtitle">Sistema de Análisis de Costos y Utilidades para Transporte de Carga</div>
+      <div class="meta">
+        <strong>Versión:</strong> 1.0 | <strong>Ubicación:</strong> Tijuana, Baja California | <strong>Fecha:</strong> Abril 2026
+      </div>
+    </div>
+
+    <div class="toc">
+      <h3>📋 ÍNDICE</h3>
+      <ol>
+        <li><a href="#sec1">Descripción General</a></li>
+        <li><a href="#sec2">Configuración de Costos</a></li>
+        <li><a href="#sec3">Cálculos Principales</a></li>
+        <li><a href="#sec4">Métricas de Rentabilidad</a></li>
+        <li><a href="#sec5">Módulo de Viaje Sencillo</a></li>
+        <li><a href="#sec6">Módulo de Vuelta Completa</a></li>
+        <li><a href="#sec7">Reporte de Liquidación</a></li>
+        <li><a href="#sec8">Conversiones de Unidades</a></li>
+        <li><a href="#sec9">Clasificación de Rentabilidad</a></li>
+        <li><a href="#sec10">Límites de Peso por Zona</a></li>
+        <li><a href="#sec11">Rutas Predefinidas (STC)</a></li>
+        <li><a href="#sec12">Ejemplo Completo</a></li>
+      </ol>
+    </div>
+
+    <h2 id="sec1">1. DESCRIPCIÓN GENERAL</h2>
+    <p>
+      El <strong>Tablero de Rentabilidad de Rutas</strong> es una aplicación web diseñada para calcular y analizar 
+      la rentabilidad de viajes de transporte de carga. Permite evaluar costos operativos, tarifas de flete 
+      y márgenes de utilidad de manera precisa y en tiempo real.
+    </p>
+    
+    <h3>Funcionalidades Principales:</h3>
+    <ul>
+      <li>✅ Análisis de viajes sencillos (punto a punto)</li>
+      <li>✅ Análisis de vueltas completas (múltiples tramos)</li>
+      <li>✅ Reporte de liquidación de viaje</li>
+      <li>✅ Historial de rutas ejecutadas</li>
+      <li>✅ Conversión de monedas (USD/MXN) con tipo de cambio actualizable</li>
+      <li>✅ Conversión de unidades (millas/km, toneladas/libras/kg)</li>
+      <li>✅ Exportación a PDF</li>
+      <li>✅ Selector de ubicación en mapa</li>
+      <li>✅ Sistema de usuarios (Admin/Consultor)</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2 id="sec2">2. CONFIGURACIÓN DE COSTOS</h2>
+    
+    <h3>2.1 Parámetros Base</h3>
+    <table>
+      <tr>
+        <th>Parámetro</th>
+        <th>Valor Default</th>
+        <th>Descripción</th>
+      </tr>
+      <tr>
+        <td>MPG (Millas por Galón)</td>
+        <td>6.5</td>
+        <td>Rendimiento de combustible del vehículo</td>
+      </tr>
+      <tr>
+        <td>Precio Diésel</td>
+        <td>$4.50 USD/galón</td>
+        <td>Precio del combustible</td>
+      </tr>
+      <tr>
+        <td>Nómina por Milla</td>
+        <td>$0.55 USD</td>
+        <td>Costo de mano de obra por milla</td>
+      </tr>
+      <tr>
+        <td>Administrativos por Milla</td>
+        <td>$0.15 USD</td>
+        <td>Gastos administrativos por milla</td>
+      </tr>
+      <tr>
+        <td>Operacionales por Milla</td>
+        <td>$0.20 USD</td>
+        <td>Gastos operacionales por milla</td>
+      </tr>
+      <tr>
+        <td>Talacha por Milla</td>
+        <td>$0.08 USD</td>
+        <td>Mantenimiento general por milla</td>
+      </tr>
+      <tr>
+        <td>Llantas por Milla</td>
+        <td>$0.05 USD</td>
+        <td>Desgaste de llantas por milla</td>
+      </tr>
+      <tr>
+        <td>Mantenimiento por Eje</td>
+        <td>$0.03 USD</td>
+        <td>Mantenimiento por eje por milla</td>
+      </tr>
+    </table>
+
+    <h3>2.2 Configuración de Vehículo</h3>
+    <table>
+      <tr>
+        <th>Tipo de Camión</th>
+        <th>Ejes</th>
+        <th>Tanques</th>
+        <th>MPG</th>
+      </tr>
+      <tr>
+        <td>Tractocamión Estándar</td>
+        <td>5</td>
+        <td>2</td>
+        <td>6.5</td>
+      </tr>
+      <tr>
+        <td>Tractocamión Aerodinámico</td>
+        <td>5</td>
+        <td>2</td>
+        <td>7.0</td>
+      </tr>
+      <tr>
+        <td>Camión Torton</td>
+        <td>3</td>
+        <td>1</td>
+        <td>8.0</td>
+      </tr>
+      <tr>
+        <td>Rabón</td>
+        <td>2</td>
+        <td>1</td>
+        <td>10.0</td>
+      </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2 id="sec3">3. CÁLCULOS PRINCIPALES</h2>
+
+    <h3>3.1 Costo por Milla (CPM)</h3>
+    <div class="formula-box">
+      <div class="title">📐 FÓRMULA:</div>
+      <code>
+        CPM = Costo_Combustible + Nómina + Administrativos + Operacionales + Talacha + Llantas<br><br>
+        Donde:<br>
+        • Costo_Combustible = Precio_Diésel ÷ MPG<br>
+        • Talacha_Total = Talacha_Base + (Mantenimiento_Eje × Número_Ejes)
+      </code>
+    </div>
+
+    <div class="example-box">
+      <div class="title">📊 EJEMPLO con valores default:</div>
+      <code>
+        Costo_Combustible = $4.50 ÷ 6.5 = <strong>$0.6923/milla</strong><br>
+        Talacha_Total = $0.08 + ($0.03 × 5) = <strong>$0.23/milla</strong><br><br>
+        CPM = $0.6923 + $0.55 + $0.15 + $0.20 + $0.23 + $0.05<br>
+        <strong>CPM = $1.8723/milla</strong>
+      </code>
+    </div>
+
+    <h3>3.2 Costo Total del Viaje</h3>
+    <div class="formula-box">
+      <div class="title">📐 FÓRMULA:</div>
+      <code>Costo_Total = (Millas × CPM) + Casetas</code>
+    </div>
+
+    <div class="example-box">
+      <div class="title">📊 EJEMPLO:</div>
+      <code>
+        Millas = 500<br>
+        CPM = $1.8723<br>
+        Casetas = $150<br><br>
+        Costo_Total = (500 × $1.8723) + $150 = <strong>$1,086.15</strong>
+      </code>
+    </div>
+
+    <h3>3.3 Utilidad (Profit)</h3>
+    <div class="formula-box">
+      <div class="title">📐 FÓRMULA:</div>
+      <code>Utilidad = Tarifa_Flete - Costo_Total</code>
+    </div>
+
+    <h3>3.4 Porcentaje de Utilidad (Margen)</h3>
+    <div class="formula-box">
+      <div class="title">📐 FÓRMULA:</div>
+      <code>Margen_% = (Utilidad ÷ Tarifa_Flete) × 100</code>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2 id="sec4">4. MÉTRICAS DE RENTABILIDAD</h2>
+
+    <table>
+      <tr>
+        <th>Métrica</th>
+        <th>Fórmula</th>
+        <th>Interpretación</th>
+      </tr>
+      <tr>
+        <td><strong>SPM</strong><br>(Sales Per Mile)</td>
+        <td><code>Tarifa ÷ Millas</code></td>
+        <td>Cuánto se cobra por cada milla recorrida</td>
+      </tr>
+      <tr>
+        <td><strong>CPM</strong><br>(Cost Per Mile)</td>
+        <td><code>Costo_Total ÷ Millas</code></td>
+        <td>Cuánto cuesta operar cada milla</td>
+      </tr>
+      <tr>
+        <td><strong>PPM</strong><br>(Profit Per Mile)</td>
+        <td><code>(Tarifa - Costo) ÷ Millas</code></td>
+        <td>Ganancia neta por cada milla recorrida</td>
+      </tr>
+      <tr>
+        <td><strong>Profit %</strong><br>(Margen)</td>
+        <td><code>((Tarifa - Costo) ÷ Tarifa) × 100</code></td>
+        <td>Porcentaje de la tarifa que queda como ganancia</td>
+      </tr>
+    </table>
+
+    <h2 id="sec5">5. MÓDULO DE VIAJE SENCILLO</h2>
+
+    <h3>5.1 Datos de Entrada</h3>
+    <table>
+      <tr>
+        <th>Campo</th>
+        <th>Descripción</th>
+      </tr>
+      <tr><td>Origen</td><td>Ciudad/ubicación de partida</td></tr>
+      <tr><td>Destino</td><td>Ciudad/ubicación de llegada</td></tr>
+      <tr><td>Millas</td><td>Distancia del recorrido</td></tr>
+      <tr><td>Tarifa del Flete</td><td>Precio cobrado al cliente (USD)</td></tr>
+      <tr><td>Casetas</td><td>Costo de peajes (USD)</td></tr>
+      <tr><td>Toneladas de Carga</td><td>Peso de la mercancía</td></tr>
+    </table>
+
+    <h3>5.2 Desglose de Costos Calculados</h3>
+    <table>
+      <tr>
+        <th>Concepto</th>
+        <th>Fórmula</th>
+      </tr>
+      <tr><td>Costo de Diésel</td><td><code>(dieselPrice ÷ mpg) × millas</code></td></tr>
+      <tr><td>Costo de Nómina</td><td><code>payrollPerMile × millas</code></td></tr>
+      <tr><td>Costo Administrativo</td><td><code>adminPerMile × millas</code></td></tr>
+      <tr><td>Costo Operacional</td><td><code>operationalPerMile × millas</code></td></tr>
+      <tr><td>Costo de Talacha</td><td><code>(talachaPerMile + mantenimientoEje × ejes) × millas</code></td></tr>
+      <tr><td>Costo de Llantas</td><td><code>llantasPerMile × millas</code></td></tr>
+    </table>
+
+    <h3>5.3 Tarifa Ideal</h3>
+    <p>Calcula la tarifa mínima necesaria para alcanzar un margen objetivo (default: 18%).</p>
+    <div class="formula-box">
+      <div class="title">📐 FÓRMULA:</div>
+      <code>Tarifa_Ideal = Costo_Total ÷ (1 - Margen_Objetivo ÷ 100)</code>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2 id="sec6">6. MÓDULO DE VUELTA COMPLETA</h2>
+
+    <h3>6.1 Estructura de Tramos</h3>
+    <p>Cada tramo del viaje contiene:</p>
+    <ul>
+      <li><strong>Tipo de movimiento:</strong> Cargado (L), Vacío (E), Deadhead (D), Bobtail (B)</li>
+      <li><strong>Origen y Destino:</strong> Ubicaciones del tramo</li>
+      <li><strong>Millas:</strong> Distancia del tramo</li>
+      <li><strong>Tarifa:</strong> Ingreso del tramo (si aplica)</li>
+      <li><strong>Casetas:</strong> Peajes del tramo</li>
+      <li><strong>Toneladas:</strong> Peso de carga</li>
+      <li><strong>Cruce por tarifa:</strong> Checkbox para cruces fronterizos</li>
+      <li><strong>Pago chofer cruce:</strong> Monto adicional para el chofer</li>
+    </ul>
+
+    <h3>6.2 Cálculo de Totales</h3>
+    <div class="formula-box">
+      <div class="title">📐 FÓRMULAS:</div>
+      <code>
+        totalMillas = Σ(millas de cada tramo)<br>
+        totalTarifa = Σ(tarifa de cada tramo)<br>
+        totalCasetas = Σ(casetas de cada tramo)<br><br>
+        totalCosto = (totalMillas × CPM) + totalCasetas<br>
+        utilidad = totalTarifa - totalCosto<br>
+        margen = (utilidad ÷ totalTarifa) × 100
+      </code>
+    </div>
+
+    <h2 id="sec7">7. REPORTE DE LIQUIDACIÓN</h2>
+
+    <h3>7.1 Estructura del Reporte</h3>
+    <p>El reporte divide el viaje en tres secciones:</p>
+    <ol>
+      <li><strong>TRAMO DE IDA:</strong> Viaje cargado de origen a destino</li>
+      <li><strong>EMPTY MILES TO LOAD:</strong> Millas vacías para cargar</li>
+      <li><strong>TRAMO DE REGRESO:</strong> Viaje cargado de regreso</li>
+    </ol>
+
+    <h3>7.2 Cálculos por Tramo</h3>
+    <table>
+      <tr>
+        <th>Métrica</th>
+        <th>Fórmula</th>
+      </tr>
+      <tr><td>Costo</td><td><code>millas × CPM</code></td></tr>
+      <tr><td>Diésel</td><td><code>millas × (dieselPrice ÷ mpg)</code></td></tr>
+      <tr><td>SPM</td><td><code>tarifa ÷ millas</code></td></tr>
+      <tr><td>PPM</td><td><code>(tarifa - costo) ÷ millas</code></td></tr>
+      <tr><td>Profit %</td><td><code>((tarifa - costo) ÷ tarifa) × 100</code></td></tr>
+    </table>
+
+    <div class="warning-box">
+      <div class="title">⚠️ NOTA IMPORTANTE:</div>
+      Las millas vacías (EMPTY) generan costo pero NO generan tarifa. 
+      Esto afecta el cálculo del SPM total, que solo considera millas productivas (cargadas).
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2 id="sec8">8. CONVERSIONES DE UNIDADES</h2>
+
+    <h3>8.1 Distancia</h3>
+    <table>
+      <tr><th>De</th><th>A</th><th>Factor</th></tr>
+      <tr><td>Millas</td><td>Kilómetros</td><td>× 1.60934</td></tr>
+      <tr><td>Kilómetros</td><td>Millas</td><td>× 0.621371</td></tr>
+    </table>
+
+    <h3>8.2 Peso</h3>
+    <table>
+      <tr><th>De</th><th>A</th><th>Factor</th></tr>
+      <tr><td>Toneladas</td><td>Libras</td><td>× 2,204.62</td></tr>
+      <tr><td>Toneladas</td><td>Kilogramos</td><td>× 1,000</td></tr>
+      <tr><td>Libras</td><td>Toneladas</td><td>÷ 2,204.62</td></tr>
+      <tr><td>Kilogramos</td><td>Toneladas</td><td>÷ 1,000</td></tr>
+    </table>
+
+    <h3>8.3 Moneda</h3>
+    <div class="formula-box">
+      <div class="title">📐 FÓRMULAS:</div>
+      <code>
+        USD a MXN: valorMXN = valorUSD × tipoCambio<br>
+        MXN a USD: valorUSD = valorMXN ÷ tipoCambio
+      </code>
+    </div>
+
+    <h2 id="sec9">9. CLASIFICACIÓN DE RENTABILIDAD</h2>
+
+    <table class="status-table">
+      <tr>
+        <th>Estado</th>
+        <th>Margen Mínimo</th>
+        <th>Color</th>
+        <th>Descripción</th>
+      </tr>
+      <tr>
+        <td class="status-ideal">IDEAL</td>
+        <td>≥ 25%</td>
+        <td>🔵 Azul</td>
+        <td>Excelente rentabilidad</td>
+      </tr>
+      <tr>
+        <td class="status-stable">ESTABLE</td>
+        <td>≥ 18%</td>
+        <td>🟢 Verde</td>
+        <td>Rentabilidad aceptable</td>
+      </tr>
+      <tr>
+        <td class="status-comodin">COMODÍN</td>
+        <td>≥ 10%</td>
+        <td>🟡 Amarillo</td>
+        <td>Rentabilidad marginal</td>
+      </tr>
+      <tr>
+        <td class="status-danger">NO RENTABLE</td>
+        <td>< 10%</td>
+        <td>🔴 Rojo</td>
+        <td>Pérdida o muy baja rentabilidad</td>
+      </tr>
+    </table>
+
+    <h2 id="sec10">10. LÍMITES DE PESO POR ZONA</h2>
+
+    <table>
+      <tr>
+        <th>Zona</th>
+        <th>Peso Máximo (lbs)</th>
+        <th>Descripción</th>
+      </tr>
+      <tr><td>Federal USA</td><td>80,000</td><td>Carreteras federales de Estados Unidos</td></tr>
+      <tr><td>California</td><td>80,000</td><td>Estado de California</td></tr>
+      <tr><td>Texas</td><td>84,000</td><td>Estado de Texas (con permisos)</td></tr>
+      <tr><td>México Federal</td><td>75,000</td><td>Carreteras federales de México</td></tr>
+      <tr><td>México Local</td><td>66,000</td><td>Carreteras locales de México</td></tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2 id="sec11">11. RUTAS PREDEFINIDAS (STC)</h2>
+
+    <table>
+      <tr>
+        <th>Ruta</th>
+        <th>Millas</th>
+        <th>Casetas USD</th>
+      </tr>
+      <tr><td>Tijuana - Los Angeles</td><td>135</td><td>$0</td></tr>
+      <tr><td>Tijuana - San Diego</td><td>20</td><td>$0</td></tr>
+      <tr><td>Tijuana - Phoenix</td><td>350</td><td>$0</td></tr>
+      <tr><td>Tijuana - Dallas</td><td>1,450</td><td>$25</td></tr>
+      <tr><td>Tijuana - Houston</td><td>1,550</td><td>$20</td></tr>
+      <tr><td>Tijuana - Chicago</td><td>2,050</td><td>$45</td></tr>
+      <tr><td>Tijuana - Atlanta</td><td>2,200</td><td>$35</td></tr>
+      <tr><td>Tijuana - Miami</td><td>2,750</td><td>$40</td></tr>
+      <tr><td>Tijuana - New York</td><td>2,800</td><td>$120</td></tr>
+      <tr><td>Tijuana - Laredo</td><td>1,275</td><td>$0</td></tr>
+      <tr><td>Los Angeles - Houston</td><td>1,550</td><td>$15</td></tr>
+      <tr><td>Laredo - Dallas</td><td>440</td><td>$10</td></tr>
+      <tr><td>Laredo - Houston</td><td>320</td><td>$8</td></tr>
+      <tr><td>Laredo - San Antonio</td><td>157</td><td>$5</td></tr>
+    </table>
+
+    <h2 id="sec12">12. EJEMPLO COMPLETO</h2>
+
+    <h3>Escenario: Viaje Tijuana → Los Angeles</h3>
+
+    <div class="example-box">
+      <div class="title">📋 DATOS DE ENTRADA:</div>
+      <ul>
+        <li>Millas: 135</li>
+        <li>Tarifa: $450 USD</li>
+        <li>Casetas: $0</li>
+        <li>Toneladas: 18</li>
+      </ul>
+    </div>
+
+    <div class="formula-box">
+      <div class="title">🔢 CÁLCULOS PASO A PASO:</div>
+      <code>
+        1. Costo de combustible por milla:<br>
+           $4.50 ÷ 6.5 = <strong>$0.6923/milla</strong><br><br>
+        
+        2. Talacha total:<br>
+           $0.08 + ($0.03 × 5) = <strong>$0.23/milla</strong><br><br>
+        
+        3. CPM Total:<br>
+           $0.6923 + $0.55 + $0.15 + $0.20 + $0.23 + $0.05 = <strong>$1.8723/milla</strong><br><br>
+        
+        4. Costo total del viaje:<br>
+           135 × $1.8723 + $0 = <strong>$252.76</strong><br><br>
+        
+        5. Utilidad:<br>
+           $450 - $252.76 = <strong>$197.24</strong><br><br>
+        
+        6. Margen de utilidad:<br>
+           ($197.24 ÷ $450) × 100 = <strong>43.83%</strong><br><br>
+        
+        7. SPM (Venta por milla):<br>
+           $450 ÷ 135 = <strong>$3.33/milla</strong><br><br>
+        
+        8. PPM (Utilidad por milla):<br>
+           $197.24 ÷ 135 = <strong>$1.46/milla</strong>
+      </code>
+    </div>
+
+    <div class="example-box" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-color: #3b82f6;">
+      <div class="title" style="color: #1e40af;">✅ RESULTADO: IDEAL (43.83% > 25%)</div>
+      <p>Este viaje tiene una excelente rentabilidad, superando ampliamente el umbral ideal del 25%.</p>
+    </div>
+
+    <div class="footer">
+      <p><strong>Tablero de Rentabilidad de Rutas</strong></p>
+      <p>Tijuana, Baja California - Abril 2026</p>
+      <p style="margin-top: 10px; font-size: 0.8rem;">
+        Para generar PDF: Presione <strong>Ctrl + P</strong> y seleccione "Guardar como PDF"
+      </p>
+    </div>
+  </div>
+</body>
+</html>
