@@ -4,6 +4,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
+import { Analytics } from '@vercel/analytics/react'
 import logoImg from './assets/logo2.png'
 import { 
   Truck, 
@@ -3783,6 +3784,7 @@ function App() {
         </div>
       )}
     </div>
+    <Analytics />
   )
 }
 
