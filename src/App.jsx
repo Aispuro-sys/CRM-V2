@@ -935,7 +935,7 @@ function App() {
   const [tipoCambio, setTipoCambio] = useState({
     valor: 17.50,
     fecha: new Date().toISOString().split('T')[0],
-    monedaActiva: 'USD', // USD o MXN
+    monedaActiva: 'MXN', // Solo MXN
     cargando: false,
     ultimaActualizacion: null,
   })
@@ -1876,14 +1876,8 @@ function App() {
           </div>
           <div className="currency-toggle">
             <button 
-              className={tipoCambio.monedaActiva === 'USD' ? 'active' : ''} 
-              onClick={() => setTipoCambio({...tipoCambio, monedaActiva: 'USD'})}
-            >
-              🇺🇸 USD
-            </button>
-            <button 
-              className={tipoCambio.monedaActiva === 'MXN' ? 'active' : ''} 
-              onClick={() => setTipoCambio({...tipoCambio, monedaActiva: 'MXN'})}
+              className="active" 
+              disabled
             >
               🇲🇽 MXN
             </button>
