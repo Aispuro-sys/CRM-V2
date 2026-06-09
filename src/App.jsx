@@ -1881,7 +1881,6 @@ function App() {
             >
               🇲🇽 MXN
             </button>
-            <span className="tc-badge">TC: ${tipoCambio.valor}</span>
           </div>
         </div>
       </header>
@@ -2033,7 +2032,7 @@ function App() {
                     onChange={(e) => setConfig({...config, talachaPerMile: parseFloat(e.target.value) || 0})}
                     step="0.01"
                   />
-                  <span className="unit">USD</span>
+                  <span className="unit">MXN</span>
                 </div>
               </div>
 
@@ -2046,7 +2045,7 @@ function App() {
                     onChange={(e) => setConfig({...config, llantasPerMile: parseFloat(e.target.value) || 0})}
                     step="0.01"
                   />
-                  <span className="unit">USD</span>
+                  <span className="unit">MXN</span>
                 </div>
               </div>
 
@@ -2059,7 +2058,7 @@ function App() {
                     onChange={(e) => setConfig({...config, mantenimientoEje: parseFloat(e.target.value) || 0})}
                     step="0.01"
                   />
-                  <span className="unit">USD</span>
+                  <span className="unit">MXN</span>
                 </div>
               </div>
 
@@ -2124,10 +2123,7 @@ function App() {
                     onChange={(e) => setConfig({...config, dieselPrice: parseFloat(e.target.value) || 0})}
                     step="0.01"
                   />
-                  <span className="unit">USD</span>
-                  {tipoCambio.monedaActiva === 'MXN' && (
-                    <span className="conversion-hint">≈ {formatCurrencyMXN(config.dieselPrice * tipoCambio.valor)}</span>
-                  )}
+                  <span className="unit">MXN</span>
                 </div>
               </div>
 
@@ -2140,7 +2136,7 @@ function App() {
                     onChange={(e) => setConfig({...config, payrollPerMile: parseFloat(e.target.value) || 0})}
                     step="0.01"
                   />
-                  <span className="unit">USD</span>
+                  <span className="unit">MXN</span>
                 </div>
               </div>
 
@@ -2153,7 +2149,7 @@ function App() {
                     onChange={(e) => setConfig({...config, adminPerMile: parseFloat(e.target.value) || 0})}
                     step="0.01"
                   />
-                  <span className="unit">USD</span>
+                  <span className="unit">MXN</span>
                 </div>
               </div>
 
@@ -2166,7 +2162,7 @@ function App() {
                     onChange={(e) => setConfig({...config, operationalPerMile: parseFloat(e.target.value) || 0})}
                     step="0.01"
                   />
-                  <span className="unit">USD</span>
+                  <span className="unit">MXN</span>
                 </div>
               </div>
 
@@ -2558,7 +2554,7 @@ function App() {
                           value={simpleTrip.rate}
                           onChange={(e) => setSimpleTrip({...simpleTrip, rate: e.target.value})}
                         />
-                        <span className="unit">USD</span>
+                        <span className="unit">MXN</span>
                       </div>
                     </div>
                   )}
@@ -2574,7 +2570,7 @@ function App() {
                         value={simpleTrip.casetas}
                         onChange={(e) => setSimpleTrip({...simpleTrip, casetas: e.target.value})}
                       />
-                      <span className="unit">USD</span>
+                      <span className="unit">MXN</span>
                     </div>
                     {simpleTrip.casetasDetalle && (
                       <small className="casetas-detalle">ℹ️ {simpleTrip.casetasDetalle}</small>
