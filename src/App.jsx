@@ -1848,14 +1848,8 @@ function App() {
         <div className="header-toggles">
           <div className="unit-toggle">
             <button 
-              className={unidadDistancia === 'millas' ? 'active' : ''} 
-              onClick={() => setUnidadDistancia('millas')}
-            >
-              Millas
-            </button>
-            <button 
-              className={unidadDistancia === 'km' ? 'active' : ''} 
-              onClick={() => setUnidadDistancia('km')}
+              className="active" 
+              disabled
             >
               Kilómetros
             </button>
@@ -3631,7 +3625,7 @@ function App() {
                     </div>
                     <div className="rate-fsc">+ FSC Per trip</div>
                     <div className="rate-total">
-                      <strong>Total: ${(rateQuote.rateDryVan * (1 + rateQuote.fscPercent/100)).toFixed(2)} Dlls</strong>
+                      <strong>Total: ${(rateQuote.rateDryVan * (1 + rateQuote.fscPercent/100)).toFixed(2)} USD</strong>
                     </div>
                   </div>
                 </div>
@@ -3658,7 +3652,7 @@ function App() {
                     </div>
                     <div className="rate-fsc">+ FSC Per trip</div>
                     <div className="rate-total">
-                      <strong>Total: ${(rateQuote.rateFlatbed * (1 + rateQuote.fscPercent/100)).toFixed(2)} Dlls</strong>
+                      <strong>Total: ${(rateQuote.rateFlatbed * (1 + rateQuote.fscPercent/100)).toFixed(2)} USD</strong>
                     </div>
                   </div>
                 </div>
