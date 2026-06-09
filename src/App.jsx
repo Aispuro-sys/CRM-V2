@@ -862,7 +862,7 @@ function App() {
     contactName: '',
     phone: '',
     email: '',
-    createdBy: 'Diego Alfaro',
+    createdBy: '',
     origen: '',
     destino: '',
     tipoCaja: 'dryvan', // 'dryvan' o 'flatbed'
