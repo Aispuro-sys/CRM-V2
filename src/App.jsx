@@ -5,7 +5,6 @@ import 'leaflet/dist/leaflet.css'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import { Analytics } from '@vercel/analytics/react'
-import logoImg from './assets/logo2.png'
 import { 
   Truck, 
   Settings, 
@@ -849,7 +848,7 @@ function App() {
   // Sistema de usuarios: 'admin' o 'consultor'
   const [tipoUsuario, setTipoUsuario] = useState('admin')
   const [tripMode, setTripMode] = useState('simple')
-  const [unidadDistancia, setUnidadDistancia] = useState('millas')
+  const [unidadDistancia, setUnidadDistancia] = useState('km')
   const [unidadPeso, setUnidadPeso] = useState('ton') // 'ton', 'lbs', 'kg'
   const [activeTab, setActiveTab] = useState('viaje')
   const [showMapa, setShowMapa] = useState(false)
@@ -1810,7 +1809,7 @@ function App() {
       <header className="header">
         <div className="header-top">
           <h1>
-            <img src={logoImg} alt="Crown Xpress Transport" className="header-logo" />
+            Sistema de Gestión de Transporte
           </h1>
           <div className="header-actions">
             <div className="user-selector">
@@ -3520,17 +3519,14 @@ function App() {
         </div>
       )}
 
-      {/* Modal de Rate Quote - Crown Xpress Transport */}
+      {/* Modal de Rate Quote */}
       {showRateQuote && (
         <div className="modal-overlay" onClick={() => setShowRateQuote(false)}>
           <div className="modal-panel rate-quote-panel" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header rate-quote-header">
-              <div className="rate-quote-logo">
-                <img src={logoImg} alt="Crown Xpress Transport" style={{height: '60px'}} />
-              </div>
               <div className="rate-quote-title">
                 <h2>RATE QUOTE</h2>
-                <p>CROWN XPRESS TRANSPORT</p>
+                <p>COTIZACIÓN DE TRANSPORTE</p>
               </div>
               <button className="btn-close" onClick={() => setShowRateQuote(false)}><X size={20} /></button>
             </div>
@@ -3599,7 +3595,7 @@ function App() {
                   </div>
                   <div className="rate-quote-field">
                     <label>EMAIL:</label>
-                    <span>dalfaro@crownxt.com</span>
+    <span>info@transport.com</span>
                   </div>
                 </div>
               </div>
@@ -3686,13 +3682,13 @@ function App() {
               <div className="rate-quote-footer-notes">
                 <p><strong>FSC is calculated on weekly bases on EIA.</strong> It may change according to fuel prices. Rates based on dock-dock service. Rates are good for 30 days. USA cargo insurance limit $250,000.00 USD.</p>
                 <p className="availability-note"><strong>ALL QUOTES ARE SUBJECT TO AVAILABILITY</strong></p>
-                <p className="notes-text"><em>Notes: At CROWN XPRESS TRANSPORT, we are dedicated to providing our customer with the finest service, using every available resource, to ensure customer satisfaction with the success of each shipment and helping reach our customers goals.</em></p>
+                <p className="notes-text"><em>Notes: We are dedicated to providing our customer with the finest service, using every available resource, to ensure customer satisfaction with the success of each shipment and helping reach our customers goals.</em></p>
               </div>
 
               {/* Signatures */}
               <div className="rate-quote-signatures">
                 <div className="signature-box">
-                  <p className="signature-label">Carrier Name: <strong>CROWN XPRESS TRANSPORT</strong></p>
+                  <p className="signature-label">Carrier Name: <strong>TRANSPORTES</strong></p>
                   <p>Signature: _______________________</p>
                   <p>Name: <strong>{rateQuote.createdBy}</strong></p>
                   <p>Title: <strong>GM</strong></p>
@@ -3707,7 +3703,7 @@ function App() {
                 </div>
               </div>
 
-              <p className="sign-return-note">** Please sign and return to Crown sales representative.</p>
+              <p className="sign-return-note">** Please sign and return to sales representative.</p>
             </div>
 
             <div className="modal-footer">
@@ -3721,7 +3717,7 @@ function App() {
                 printWindow.document.write(`
                   <html>
                   <head>
-                    <title>Rate Quote - Crown Xpress Transport</title>
+                    <title>Rate Quote - Transporte</title>
                     <style>
                       * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
                       body { padding: 15px; font-size: 11px; }
@@ -3763,10 +3759,9 @@ function App() {
                   </head>
                   <body>
                     <div class="header-print">
-                      <img src="${logoSrc}" alt="Crown Xpress Transport" />
                       <div class="title">
                         <h1>RATE QUOTE</h1>
-                        <p>CROWN XPRESS TRANSPORT</p>
+                        <p>COTIZACIÓN DE TRANSPORTE</p>
                       </div>
                     </div>
                     ${printContent}
