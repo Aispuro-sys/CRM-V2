@@ -2077,30 +2077,6 @@ function App() {
                 <h3>Configuración de Costos</h3>
               </div>
 
-              {/* Tipo de Cambio MXN/USD */}
-              <div className="tipo-cambio-section-compact">
-                <div className="tc-row">
-                  <DollarSign size={14} />
-                  <span className="tc-label">1 USD =</span>
-                  <input
-                    type="number"
-                    value={tipoCambio.valor}
-                    onChange={(e) => setTipoCambio({...tipoCambio, valor: parseFloat(e.target.value) || 17.50})}
-                    step="0.01"
-                    className="tc-input-compact"
-                  />
-                  <span className="tc-label">MXN</span>
-                  <button 
-                    className="btn-actualizar-tc-compact"
-                    onClick={obtenerTipoCambio}
-                    disabled={tipoCambio.cargando}
-                    title="Actualizar tipo de cambio"
-                  >
-                    {tipoCambio.cargando ? '...' : '🔄'}
-                  </button>
-                </div>
-              </div>
-
               <div className="form-group">
                 <label>Rendimiento (MPG)</label>
                 <div className="input-with-unit">
@@ -3004,17 +2980,6 @@ function App() {
                   </span>
                 </div>
               )}
-
-              {/* Indicador de tipo de cambio */}
-              <div className="tc-indicator">
-                <span>💱 TC: 1 USD = {tipoCambio.valor} MXN</span>
-                <button 
-                  className={`btn-toggle-moneda ${tipoCambio.monedaActiva === 'MXN' ? 'mxn' : ''}`}
-                  onClick={() => setTipoCambio({...tipoCambio, monedaActiva: tipoCambio.monedaActiva === 'USD' ? 'MXN' : 'USD'})}
-                >
-                  {tipoCambio.monedaActiva === 'USD' ? '🇺🇸 USD' : '🇲🇽 MXN'}
-                </button>
-              </div>
 
               <div className="metrics-grid">
                 <div className="metric">
