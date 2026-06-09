@@ -1805,6 +1805,7 @@ function App() {
   }
 
   return (
+    <>
     <div className="app-container">
       <header className="header">
         <div className="header-top">
@@ -3780,6 +3781,7 @@ function App() {
       )}
     </div>
     <Analytics />
+    </>
   )
 }
 
